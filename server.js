@@ -15,6 +15,11 @@ app.get("/", async (req, res) => {
     res.send(todos).status(200)
     });
 
+    app.get("/test", async (req, res) => {
+      res.send('Hello i am working').status(200)
+      });
+  
+
 app.post('/', async (req, res) => {
   const todoTask = new TodoTask({
     content: req.body.content
