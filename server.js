@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-const TodoTask = require('./models/TodoTask');
+const TodoTask = require('./Models/TodoTask.js');
 
 dotenv.config();
 const app = express();
