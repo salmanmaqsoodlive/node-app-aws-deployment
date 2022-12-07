@@ -51,4 +51,4 @@ steps:
       deployment_package: deploy.zip
       
   - name: Deployed!
-        run: echo App deployed to ELB
+    run: echo App deployed to ELB
