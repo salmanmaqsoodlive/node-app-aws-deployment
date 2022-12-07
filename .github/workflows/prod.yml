@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-node:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -30,14 +30,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Installing NPM
-        run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       
-      - name: Start application
-        run: npm start
+      - name: rename main js
+        run: mv build/static/js/main.*.*.js build/static/js/main.js
       
       - name: Generate deployment package
-        run: zip -r deploy.zip * .[^.]* -x "**node_modules**"
+        run: zip -r deploy.zip * -x "**node_modules**"
 
       - name: Beanstalk Deploy for app
         uses: einaregilsson/beanstalk-deploy@v16
