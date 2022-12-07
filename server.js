@@ -10,6 +10,57 @@ const PORT = 8080;
 
 app.use(express.json());
 
+
+function main(propertyId = 'G-3PR2LJH8PZ') {
+  
+  const {BetaAnalyticsDataClient} = require('@google-analytics/data');
+
+  const analyticsDataClient = new BetaAnalyticsDataClient();
+
+  // Runs a simple report.
+  async function runReport() {
+    // [START analyticsdata_run_report]
+    const [response] = await analyticsDataClient.runReport({
+      property: `properties/${propertyId}`,
+      dateRanges: [
+        {
+          startDate: '2020-03-31',
+          endDate: 'today',
+        },
+      ],
+      dimensions: [
+        {
+          name: 'city',
+        },
+      ],
+      metrics: [
+        {
+          name: 'activeUsers',
+        },
+      ],
+    });
+    // [END analyticsdata_run_report]
+
+    // [START analyticsdata_run_report_response]
+    console.log('Report result:');
+    response.rows.forEach(row => {
+      console.log(row.dimensionValues[0], row.metricValues[0]);
+    });
+    // [END analyticsdata_run_report_response]
+  }
+
+  runReport();
+  // [END analyticsdata_quickstart]
+}
+
+
+app.get("/google", async (req, res) => {
+  main()
+  // res.send().status(200)
+  
+  });
+
+
 app.get("/health", async (req, res) => {
   res.send().status(200)
   });
