@@ -10,10 +10,10 @@ on:
 
 jobs:
   ci:
-    runs-on: ${{ matrixx.os }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
-      matrixx:
+      matrix:
         os: [ubuntu-latest]
         node: [16]
     env:
