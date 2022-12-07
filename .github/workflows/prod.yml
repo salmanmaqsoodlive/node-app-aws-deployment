@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  ci:
+  build:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest]
