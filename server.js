@@ -67,7 +67,7 @@ app.get("/health", async (req, res) => {
 
 
   app.get("/change", async (req, res) => {
-    res.send("changed happen.").status(200)
+    res.send("changed happened.").status(200)
     });
 
 app.get("/", async (req, res) => {

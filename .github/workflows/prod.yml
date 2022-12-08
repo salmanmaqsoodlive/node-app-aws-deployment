@@ -18,6 +18,10 @@ jobs:
       
       - name: Generate deployment package
         run: zip -r deploy.zip * .[^.]* -x "**node_modules**"
+      
+      - name: Get current time
+        uses: gerred/actions/current-time@master
+        id: current-time
 
       - name: Beanstalk Deploy for app
         uses: einaregilsson/beanstalk-deploy@v16
@@ -27,7 +31,7 @@ jobs:
           application_name: todo-backend
           environment_name: todo-backend-dev
           region: ap-south-1
-          version_label: "app-a6fb-221208_163129717114"
+          version_label: "${{ steps.current-time.outputs.time }}"
           deployment_package: deploy.zip
           
       - name: Deployed!
