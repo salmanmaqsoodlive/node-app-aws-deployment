@@ -9,27 +9,12 @@ on:
       - main
 
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [16]
-    env:
-      NODE_ENV: "development"
-
+  build:
+    runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       
       - name: Generate deployment package
         run: zip -r deploy.zip * .[^.]* -x "**node_modules**"
