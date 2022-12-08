@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
+
       - name: Checkout
         uses: actions/checkout@v2
       
@@ -27,7 +27,7 @@ jobs:
           application_name: todo-backend
           environment_name: todo-backend-dev
           region: ap-south-1
-          # version_label: "version-label-${{ steps.format-time.outputs.replaced }}"
+          version_label: 12345
           deployment_package: deploy.zip
           
       - name: Deployed!
