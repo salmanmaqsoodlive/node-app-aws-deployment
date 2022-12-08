@@ -65,6 +65,11 @@ app.get("/health", async (req, res) => {
   res.send().status(200)
   });
 
+
+  app.get("/change", async (req, res) => {
+    res.send("changed happen.").status(200)
+    });
+
 app.get("/", async (req, res) => {
     const todos = await TodoTask.find();
     res.send(todos).status(200)
